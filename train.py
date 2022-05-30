@@ -87,6 +87,11 @@ def example_gan(result_dir="output", data_dir="data", chk_dir="checkpoint"):
         t_ext = i.split(".")[0].split("_")[-1]
         if t_ext.isdecimal() and int(t_ext) > i_ext:
             i_ext = int(t_ext)
+
+    # make backlog
+    if not os.path.exists(chk_dir + "/backlog/"):
+        os.mkdir(chk_dir + "/backlog/")
+
     #search checkpoint file
     resume_cm = chk_dir+"/cmp_model_"+str(i_ext)
     resume_dm = chk_dir+"/d_model_"+str(i_ext)
@@ -163,8 +168,6 @@ def example_gan(result_dir="output", data_dir="data", chk_dir="checkpoint"):
         plt.close()
         if n % 10 == 0:
             # move before model
-            if os.path.exists(chk_dir + "/backlog/"):
-                os.mkdir(chk_dir + "/backlog/")
             for i in glob.glob(chk_dir + "/*"):
                 if not os.path.isdir(i):
                     shutil.move(i, chk_dir + "/backlog/")
