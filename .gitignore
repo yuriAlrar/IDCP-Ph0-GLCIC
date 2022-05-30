@@ -2,6 +2,7 @@ data/*
 test/*
 checkpoint/*
 output/*
+!.gitkeep
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
