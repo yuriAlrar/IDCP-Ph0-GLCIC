@@ -173,9 +173,10 @@ def example_gan(result_dir="output", data_dir="data", chk_dir="checkpoint"):
             cmp_model.save_weights(cm+"_"+str(n))
             d_model.save_weights(dm+"_"+str(n))
             all_model.save_weights(am+"_"+str(n))
+            generator.save(gnm+"_"+str(n)+".h5")
 
             #remove before model
-            for i in glob.glob(chk_dir + "/*"):
+            for i in glob.glob(chk_dir + "/backlog/*"):
                 if not os.path.isdir(i):
                     os.remove(i)
     # save model
