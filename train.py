@@ -161,22 +161,23 @@ def example_gan(result_dir="output", data_dir="data", chk_dir="checkpoint"):
             axs[i, 2].set_title('Ground Truth')
         fig.savefig(os.path.join(result_dir, "result_%d.png" % n))
         plt.close()
-        if n % 100 == 0:
+        if n % 10 == 0:
+            # move before model
+            if os.path.exists(chk_dir + "/backlog/"):
+                os.mkdir(chk_dir + "/backlog/")
+            for i in glob.glob(chk_dir + "/*"):
+                if not os.path.isdir(i):
+                    shutil.move(i, chk_dir + "/backlog/")
+            
             # save model
             cmp_model.save_weights(cm+"_"+str(n))
             d_model.save_weights(dm+"_"+str(n))
             all_model.save_weights(am+"_"+str(n))
-            for i in glob.glob(cm+"_"+str(n-10)+"*"):
-                os.remove(i)
-            for i in glob.glob(dm+"_"+str(n-10)+"*"):
-                os.remove(i)
-            for i in glob.glob(am+"_"+str(n-10)+"*"):
-                os.remove(i)
 
-            generator.save(gnm+"_"+str(n)+".h5")
             #remove before model
-            if os.path.isdir(gnm+"."+str(n-10)+".h5"):
-                shutil.rmtree(gnm+"."+str(n-10))
+            for i in glob.glob(chk_dir + "/*"):
+                if not os.path.isdir(i):
+                    os.remove(i)
     # save model
     generator.save(os.path.join(result_dir, "generator.h5"))
 
