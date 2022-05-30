@@ -167,6 +167,11 @@ def example_gan(result_dir="output", data_dir="data", chk_dir="checkpoint"):
         fig.savefig(os.path.join(result_dir, "result_%d.png" % n))
         plt.close()
         if n % 10 == 0:
+            #remove before-before model
+            for i in glob.glob(chk_dir + "/backlog/*"):
+                if not os.path.isdir(i):
+                    os.remove(i)
+
             # move before model
             for i in glob.glob(chk_dir + "/*"):
                 if not os.path.isdir(i):
@@ -178,10 +183,6 @@ def example_gan(result_dir="output", data_dir="data", chk_dir="checkpoint"):
             all_model.save_weights(am+"_"+str(n))
             generator.save(gnm+"_"+str(n)+".h5")
 
-            #remove before model
-            for i in glob.glob(chk_dir + "/backlog/*"):
-                if not os.path.isdir(i):
-                    os.remove(i)
     # save model
     generator.save(os.path.join(result_dir, "generator.h5"))
 
