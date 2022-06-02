@@ -67,7 +67,7 @@ class DataGenerator(object):
 def example_gan(result_dir="output", data_dir="data", chk_dir="checkpoint"):
     input_shape = (256, 256, 3)
     local_shape = (128, 128, 3)
-    batch_size = 8
+    batch_size = 32
     ext_epoch = 0
     n_epoch = 100000
     tc = int(n_epoch * 0.18)
