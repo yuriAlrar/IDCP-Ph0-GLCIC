@@ -69,7 +69,7 @@ def example_gan(result_dir="output", data_dir="data", chk_dir="checkpoint"):
     local_shape = (128, 128, 3)
     batch_size = 16
     ext_epoch = 0
-    n_epoch = 100000
+    n_epoch = 50000
     tc = int(n_epoch * 0.18)
     td = int(n_epoch * 0.02)
     alpha = 0.0004
